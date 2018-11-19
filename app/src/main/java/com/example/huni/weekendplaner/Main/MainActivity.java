@@ -1,4 +1,4 @@
-package com.example.huni.weekendplaner;
+package com.example.huni.weekendplaner.Main;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -10,8 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.example.huni.weekendplaner.Sidebar.IntrestsActivity;
+import com.example.huni.weekendplaner.Login.LoginActivity;
+import com.example.huni.weekendplaner.Sidebar.ProfilActivity;
+import com.example.huni.weekendplaner.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private int valtozo23123;

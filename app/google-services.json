@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "490894679692",
+    "firebase_url": "https://weekendplaner-494c7.firebaseio.com",
+    "project_id": "weekendplaner-494c7",
+    "storage_bucket": "weekendplaner-494c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490894679692:android:a2a6f91be63bc43f",
+        "android_client_info": {
+          "package_name": "com.example.huni.weekendplaner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490894679692-9kvkcos7l9k3a1lt59a6347315v0p1ir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.huni.weekendplaner",
+            "certificate_hash": "0dfc1f610adc1616b7beff61aea967c4746fec20"
+          }
+        },
+        {
+          "client_id": "490894679692-lolhfip41bm0902rqqn3c9nr6di1rgf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRtuCgAN34j2sTM7MjlumCGQoM7oAIj8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490894679692-lolhfip41bm0902rqqn3c9nr6di1rgf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

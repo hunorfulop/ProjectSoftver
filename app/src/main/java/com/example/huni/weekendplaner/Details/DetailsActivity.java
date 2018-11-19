@@ -1,7 +1,9 @@
-package com.example.huni.weekendplaner;
+package com.example.huni.weekendplaner.Details;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.huni.weekendplaner.R;
 
 public class DetailsActivity extends AppCompatActivity {
 

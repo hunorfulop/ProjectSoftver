@@ -1,4 +1,4 @@
-package com.example.huni.weekendplaner;
+package com.example.huni.weekendplaner.Main;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static android.support.v4.content.ContextCompat.startActivity;
+import com.example.huni.weekendplaner.Details.DetailsActivity;
+import com.example.huni.weekendplaner.R;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 

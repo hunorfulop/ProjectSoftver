@@ -1,14 +1,14 @@
-package com.example.huni.weekendplaner;
+package com.example.huni.weekendplaner.Login;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.example.huni.weekendplaner.Login.LoginActivity;
+import com.example.huni.weekendplaner.R;
 
 public class SplashActivity extends AppCompatActivity {
 

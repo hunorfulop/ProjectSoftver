@@ -1,4 +1,4 @@
-package com.example.huni.weekendplaner;
+package com.example.huni.weekendplaner.Sidebar;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.huni.weekendplaner.Main.RecyclerAdapter;
+import com.example.huni.weekendplaner.R;
 
 public class IntrestsActivity extends AppCompatActivity {
 

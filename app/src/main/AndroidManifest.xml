@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".Login.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Login.RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ProfilActivity" />
-        <activity android:name=".IntrestsActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".Main.MainActivity" />
+        <activity android:name=".Sidebar.ProfilActivity" />
+        <activity android:name=".Sidebar.IntrestsActivity" />
+        <activity android:name=".Details.DetailsActivity"></activity>
     </application>
 
 </manifest>
