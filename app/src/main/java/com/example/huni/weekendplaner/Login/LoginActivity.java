@@ -20,15 +20,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class  LoginActivity extends AppCompatActivity {
 
     EditText editTextPhonenumber, editTextCode;
-
+    FirebaseDatabase database;
     FirebaseAuth mAuth;
-
+    DatabaseReference ref;
     String codeSent;
 
     @Override
@@ -37,6 +44,10 @@ public class  LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("User");
+
 
         editTextPhonenumber = findViewById(R.id.phoneNumber_editText);
         editTextCode = findViewById(R.id.code_editText);
@@ -51,7 +62,25 @@ public class  LoginActivity extends AppCompatActivity {
         findViewById(R.id.login_Activity_GetCode_Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendVerificationCode();
+
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User user = new User(editTextPhonenumber.getText().toString());
+                        if (dataSnapshot.child(Objects.requireNonNull(ref.child(user.getPhonenumber()).getKey())).exists()){
+                            Toast.makeText(getApplicationContext(),"You exist",Toast.LENGTH_LONG).show();
+                            sendVerificationCode();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Please register first",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
