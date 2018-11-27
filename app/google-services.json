@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "490894679692-ah8n99amku3ntiov9746aipvj8rlgt7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.huni.weekendplaner",
+            "certificate_hash": "f214307e40bee6ee9f3b78f1b7ccede69263b672"
+          }
+        },
+        {
           "client_id": "490894679692-lolhfip41bm0902rqqn3c9nr6di1rgf6.apps.googleusercontent.com",
           "client_type": 3
         }

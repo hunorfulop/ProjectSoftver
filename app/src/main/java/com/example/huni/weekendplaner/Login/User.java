@@ -14,6 +14,10 @@ public class User {
     public User(){
     }
 
+    public User(String phonenumber){
+        this.phonenumber = phonenumber;
+    }
+
     public User(String phonenumber, String lastname,String firstname, String image, ArrayList<String> intrests, Boolean admin) {
         this.phonenumber = phonenumber;
         this.lastname = lastname;
