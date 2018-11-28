@@ -44,13 +44,19 @@ public class  LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
 
-
         editTextPhonenumber = findViewById(R.id.phoneNumber_editText);
         editTextCode = findViewById(R.id.code_editText);
+
+        findViewById(R.id.Main_creen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
+
 
         findViewById(R.id.login_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
