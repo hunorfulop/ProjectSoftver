@@ -29,7 +29,7 @@ public class IntrestsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerAdapter();
-        recyclerView.setAdapter(adapter);
+       // adapter = new RecyclerAdapter();
+       // recyclerView.setAdapter(adapter);
     }
 }

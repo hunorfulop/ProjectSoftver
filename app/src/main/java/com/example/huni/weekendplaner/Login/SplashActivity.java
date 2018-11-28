@@ -26,6 +26,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                //https://stackoverflow.com/questions/40956556/how-to-keep-login-state-and-logout-state-in-android-firebase
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 finish();
             }
