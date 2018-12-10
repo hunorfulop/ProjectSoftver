@@ -3,10 +3,11 @@ package com.example.huni.weekendplaner.Main;
 public class ListDataEvent {
     public String address;
     public String author;
-    public String descriptionOfEvent;
+    public String description;
     public String start_date;
     public String end_date;
     public String name;
+    public String image;
 
     public ListDataEvent() {
     }
@@ -20,7 +21,7 @@ public class ListDataEvent {
     }
 
     public void setDescriptionOfEvent(String descriptionOfEvent) {
-        this.descriptionOfEvent = descriptionOfEvent;
+        this.description = descriptionOfEvent;
     }
 
     public void setStart_date(String start_date) {
@@ -44,7 +45,7 @@ public class ListDataEvent {
     }
 
     public String getDescriptionOfEvent() {
-        return descriptionOfEvent;
+        return description;
     }
 
     public String getStart_date() {
@@ -58,4 +59,13 @@ public class ListDataEvent {
     public String getNameOfEvent() {
         return name;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

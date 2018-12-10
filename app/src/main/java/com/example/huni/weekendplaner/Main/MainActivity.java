@@ -52,16 +52,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mdrawerlayout.addDrawerListener(mtoogle);
         mtoogle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //database
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Event");
-
         List<ListDataEvent> listDataEvents =  getDataFromDatabase();
+
         //recyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerAdapter(listDataEvents);
+        adapter = new RecyclerAdapter(listDataEvents,this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -75,18 +76,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ListDataEvent Event = dataSnapshot1.getValue(ListDataEvent.class);
                     ListDataEvent listDataEvent = new ListDataEvent();
                     assert Event != null;
-                    String address = Event.getAddress();
-                    String author = Event.getAuthor();
-                    String descriptionOfEvent = Event.getDescriptionOfEvent();
                     String start_date = Event.getStart_date();
-                    String end_date = Event.getEnd_date();
                     String nameOfEvent = Event.getNameOfEvent();
-                    listDataEvent.setAddress(address);
-                    listDataEvent.setAuthor(author);
-                    listDataEvent.setDescriptionOfEvent(descriptionOfEvent);
+                    String imageOfEvent = Event.getImage();
+                    String end_date = Event.getEnd_date();
+                    String address =  Event.getAddress();
+                    String description = Event.getDescriptionOfEvent();
+                    String author = Event.getAuthor();
                     listDataEvent.setStart_date(start_date);
-                    listDataEvent.setEnd_date(end_date);
                     listDataEvent.setNameOfEvent(nameOfEvent);
+                    listDataEvent.setImage(imageOfEvent);
+                    listDataEvent.setEnd_date(end_date);
+                    listDataEvent.setAddress(address);
+                    listDataEvent.setDescriptionOfEvent(description);
+                    listDataEvent.setAuthor(author);
                     list.add(listDataEvent);
                 }
             }
