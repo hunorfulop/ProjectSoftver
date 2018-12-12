@@ -79,6 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"sadas",new ArrayList<String>(),false);
 
         ref.child(user.getPhonenumber()).setValue(user);
+        System.out.println("TAGfasz "+ ref);
+
 
         Toast.makeText(RegisterActivity.this,"Registered succssefuly",Toast.LENGTH_LONG).show();
     }
@@ -154,41 +156,3 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 }
-
-
-/*
-
-public void register(View view){
-        ///Toast.makeText(RegisterActivity.this,"Data Inserted111111",Toast.LENGTH_LONG).show();
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //getValues();
-                Toast.makeText(RegisterActivity.this,"Data Inserted22222222222222222222",Toast.LENGTH_LONG).show();
-                User user1 = new User();
-                user1.setPhonenumber(phonenumber.getText().toString());
-                user1.setNickname(nickname.getText().toString());
-                user1.setAdmin(false);
-                user1.setImage("asdas");
-                user1.setIntrests(new ArrayList<String>());
-                ref.child("User1").setValue(user1);
-                Toast.makeText(RegisterActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-        Button buttton = findViewById(R.id.registerActivity_registerButton);
-
-        buttton.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View v) {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        }
-        });
-        */

@@ -7,7 +7,7 @@ public class ListDataEvent {
     public String start_date;
     public String end_date;
     public String name;
-    public String image;
+    public String img;
 
     public ListDataEvent() {
     }
@@ -61,11 +61,11 @@ public class ListDataEvent {
     }
 
     public String getImage() {
-        return image;
+        return img;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.img = image;
     }
 
 }

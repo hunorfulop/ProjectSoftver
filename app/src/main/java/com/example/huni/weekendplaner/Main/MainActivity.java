@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = settings.edit();
                 editor.remove("username");
-
+                editor.apply();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 break;
         }
