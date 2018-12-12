@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Sidebar.ProfilActivity">
 
+    <Button
+        android:id="@+id/button_profil_chosse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button_profil_upload"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-121dp"
+        android:layout_marginTop="6dp"
+        android:text="Choose file" />
+
+    <EditText
+        android:id="@+id/edit_text_profil_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_profil_chosse"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/button_profil_chosse"
+        android:hint="Enter file name" />
+
+    <Button
+        android:id="@+id/button_profil_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="328dp"
+        android:text="Upload" />
+
     <TextView
         android:id="@+id/textView_firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="288dp"
+        android:layout_below="@+id/button_profil_upload"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="35dp"
         android:text="Firstname"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,10 +50,25 @@
     <TextView
         android:id="@+id/textView2_lastName"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_firstName"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="41dp"
         android:text="Lastname"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_firstName" />
-</android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/profil_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_profil_file"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="77dp"
+        app:srcCompat="@android:drawable/presence_away" />
+
+</RelativeLayout>
