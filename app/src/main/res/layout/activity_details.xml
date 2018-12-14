@@ -18,7 +18,7 @@
         app:srcCompat="@mipmap/ic_forground_metallica" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_nameOfEvent"
         android:layout_width="73dp"
         android:layout_height="34dp"
         android:layout_marginEnd="67dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView2_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="41dp"
@@ -39,10 +39,10 @@
         android:text="14 August 2019"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_nameOfEvent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView3_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
@@ -50,13 +50,13 @@
         android:layout_marginStart="31dp"
         android:layout_marginTop="19dp"
         android:text="Bucursti-Bulevardul Basarabia 37-39-National Arena"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/textView4_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView4_desc"
         android:layout_width="wrap_content"
         android:layout_height="447dp"
         android:layout_marginBottom="262dp"
@@ -79,9 +79,19 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="121dp"
         android:layout_marginTop="62dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/textView3_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2_start"
         app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <TextView
+        android:id="@+id/textView_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="80dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2_start" />
 </android.support.constraint.ConstraintLayout>

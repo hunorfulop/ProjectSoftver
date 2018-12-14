@@ -1,6 +1,9 @@
 package com.example.huni.weekendplaner.Login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -115,6 +118,11 @@ public class  LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("username",editTextPhonenumber.getText().toString());
+                            editor.apply();
+                            System.out.println("Ez egy Tag"+ editTextPhonenumber.getText().toString());
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             finish();
                         } else {
@@ -173,34 +181,4 @@ public class  LoginActivity extends AppCompatActivity {
 
 }
 
-        /*---------------------------------------------------------------------------------------------------------------
-        Old Phone number Validation
-
-        Button login_Button = findViewById(R.id.login_login_button);
-        Button register_Button = findViewById(R.id.login_register_button);
-        TextInputLayout phoneNumber_textinputLayout = findViewById(R.id.textInputLayout);
-        TextInputLayout code_textinputLayout = findViewById(R.id.textInputLayout2);
-        final EditText phoneNumber = findViewById(R.id.phoneNumber_editText);
-        final EditText code = findViewById(R.id.code_editText);
-
-        login_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if((phoneNumber.getText().toString().equals("1234") && (code.getText().toString().equals("1234")))){
-                   startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                   finish();
-               }
-               else{
-                   Toast.makeText(getApplicationContext(),"Invalid phonenumber or code",Toast.LENGTH_LONG).show();
-               }
-            }
-        });
-
-        register_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
-            }
-        });
-        --------------------------------------------------------------------------------------------------------------*/
 
