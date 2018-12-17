@@ -17,11 +17,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.huni.weekendplaner.Login.User;
 import com.example.huni.weekendplaner.Main.ListDataEvent;
 import com.example.huni.weekendplaner.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,16 +76,16 @@ public class ProfilActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
                     System.out.println("TAG771 " + dataSnapshot1.getKey() + '\t' + s);
                     if(Objects.equals(dataSnapshot1.getKey(), s)) {
-                    System.out.println("TAG771 " + dataSnapshot1.getKey() + '\t' + s);
-                    User user = dataSnapshot1.getValue(User.class);
-                    User listDataUser = new User();
-                    assert user != null;
-                    String firstname = user.getFirstname();
-                    String lastname = user.getLastname();
-                    listDataUser.setFirstname(firstname);
-                    listDataUser.setLastname(lastname);
-                    setText(firstname,lastname);
-                } }
+                        System.out.println("TAG771 " + dataSnapshot1.getKey() + '\t' + s);
+                        User user = dataSnapshot1.getValue(User.class);
+                        User listDataUser = new User();
+                        assert user != null;
+                        String firstname = user.getFirstname();
+                        String lastname = user.getLastname();
+                        listDataUser.setFirstname(firstname);
+                        listDataUser.setLastname(lastname);
+                        setText(firstname,lastname);
+                    } }
             }
 
             @Override
@@ -115,8 +120,8 @@ public class ProfilActivity extends AppCompatActivity {
     public void setText(String firstname, String lastname){
         TextView textView_firstName = findViewById(R.id.textView_firstName);
         TextView textView_lastName = findViewById(R.id.textView2_lastName);
-            textView_firstName.setText(firstname);
-            textView_lastName.setText(lastname);
+        textView_firstName.setText(firstname);
+        textView_lastName.setText(lastname);
     }
 
     public void openFileChooser(){
@@ -133,7 +138,10 @@ public class ProfilActivity extends AppCompatActivity {
                 && data != null && data.getData() != null){
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(imageView);
+            Glide.with(this)
+                    .load(mImageUri)
+                    .apply(new RequestOptions().override(500,500))
+                    .into(imageView);
 
         }
     }
@@ -146,37 +154,29 @@ public class ProfilActivity extends AppCompatActivity {
         if(mImageUri != null){
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() +
                     "." + getFileExtension(mImageUri));
-            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //mProgressbar
-                        }
-                    },5000);
-                    Toast.makeText(ProfilActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
-                    Upload upload = new Upload(profil_file_name.getText().toString().trim(),
-                            fileReference.getDownloadUrl().toString());
-                    //String uploadID = mDatabaseref.push().getKey();
-                    mDatabaseref.child(user_number).setValue(upload);
-
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(ProfilActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    //mProgressbar
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        Uri downloadUri = task.getResult();
+                        System.out.println("TAG771 profile pic: \t" + downloadUri.toString());
+                        Upload upload = new Upload(profil_file_name.getText().toString().trim(),
+                                downloadUri.toString());
+                        mDatabaseref.child(user_number).setValue(upload);
+                    }else
+                    {
+                        Toast.makeText(ProfilActivity.this, "upload failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-        }else {
-            Toast.makeText(this,"No file selected",Toast.LENGTH_SHORT).show();
         }
     }
 }

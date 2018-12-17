@@ -46,10 +46,12 @@ public class  LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Setting up the database connection
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
 
+        //Declaring fields form the view
         editTextPhonenumber = findViewById(R.id.phoneNumber_editText);
         editTextCode = findViewById(R.id.code_editText);
 
@@ -60,7 +62,7 @@ public class  LoginActivity extends AppCompatActivity {
             }
         });
 
-
+        //Login button OnClickListener
         findViewById(R.id.login_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +70,7 @@ public class  LoginActivity extends AppCompatActivity {
                 }
         });
 
+        //Get code OnClikListener
         findViewById(R.id.login_Activity_GetCode_Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,11 +79,14 @@ public class  LoginActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = new User(editTextPhonenumber.getText().toString());
+                        //In the if statement we verify if the user has aleready registerd
                         if (dataSnapshot.child(Objects.requireNonNull(ref.child(user.getPhonenumber()).getKey())).exists()){
+                            //If he is in the database we send a verification code
                             Toast.makeText(getApplicationContext(),"You exist",Toast.LENGTH_LONG).show();
                             sendVerificationCode();
                         }
                         else{
+                            //If he isn`t in the database we notify him about that
                             Toast.makeText(getApplicationContext(),"Please register first",Toast.LENGTH_LONG).show();
                         }
                     }
@@ -93,6 +99,7 @@ public class  LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Login button OnClickListener
         findViewById(R.id.login_login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +113,7 @@ public class  LoginActivity extends AppCompatActivity {
 
     }
 
+    //This function verifys the sign in code
     private void verifySignInCode(){
         String code = editTextCode.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSent, code);
@@ -118,11 +126,13 @@ public class  LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //If sign in code is correct we save the user with the help of shared preferences a the logged in user
                             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = settings.edit();
                             editor.putString("username",editTextPhonenumber.getText().toString());
                             editor.apply();
                             System.out.println("Ez egy Tag"+ editTextPhonenumber.getText().toString());
+                            //We start the main screen
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             finish();
                         } else {
@@ -135,6 +145,7 @@ public class  LoginActivity extends AppCompatActivity {
                 });
     }
 
+    //This function sends the verification code
     private void sendVerificationCode() {
 
         String phone = editTextPhonenumber.getText().toString();
@@ -177,7 +188,6 @@ public class  LoginActivity extends AppCompatActivity {
             codeSent = s;
         }
     };
-
 
 }
 

@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="-121dp"
         android:layout_marginTop="6dp"
-        android:text="Choose file" />
+        android:text="@string/choose_file" />
 
     <EditText
         android:id="@+id/edit_text_profil_file"
@@ -23,7 +23,7 @@
         android:layout_alignBottom="@+id/button_profil_chosse"
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/button_profil_chosse"
-        android:hint="Enter file name" />
+        android:hint="@string/enter_file_name" />
 
     <Button
         android:id="@+id/button_profil_upload"
@@ -32,8 +32,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="139dp"
-        android:layout_marginTop="328dp"
-        android:text="Upload" />
+        android:layout_marginTop="338dp"
+        android:text="@string/upload" />
 
     <TextView
         android:id="@+id/textView_firstName"
@@ -41,9 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_profil_upload"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="35dp"
-        android:text="Firstname"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="94dp"
+        android:text="@string/firstname"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:autoSizeMaxTextSize="@dimen/activity_horizontal_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,9 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_firstName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="41dp"
-        android:text="Lastname"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="-19dp"
+        android:text="@string/lastname"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_firstName" />
 
@@ -66,9 +69,9 @@
         android:layout_below="@+id/edit_text_profil_file"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="77dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="79dp"
         app:srcCompat="@android:drawable/presence_away" />
 
 </RelativeLayout>

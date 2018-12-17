@@ -62,6 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     intent.putExtra("AdresofEvent",listDataEvents.get(position).getAddress());
                     intent.putExtra("AuthorfEvent",listDataEvents.get(position).getAuthor());
                     intent.putExtra("ImageofEvent",listDataEvents.get(position).getImage());
+                    intent.putExtra("IdofEvent",listDataEvents.get(position).getId());
                     v.getContext().startActivity(intent);
                 }
             });

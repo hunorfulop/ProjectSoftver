@@ -29,12 +29,13 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    //Firebase variables
     FirebaseDatabase database;
-    EditText phonenumber,lastname,firstname,code;
-    Button register,getCode;
     DatabaseReference ref;
     FirebaseAuth mAuth;
+
+    EditText phonenumber,lastname,firstname,code;
+    Button register,getCode;
     String codeSent;
 
     @Override
@@ -42,8 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth = FirebaseAuth.getInstance();
-
+        //Initializating the view elements
         phonenumber = (EditText) findViewById(R.id.register_phonenumber);
         lastname = (EditText) findViewById(R.id.register_Lastname);
         firstname = (EditText) findViewById(R.id.register_FirstName);
@@ -51,10 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
         getCode = (Button) findViewById(R.id.button_getcode);
         register = (Button) findViewById(R.id.registerActivity_registerButton);
 
-
+        //Setting up Firebase connection
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
 
+        //GetCode OncliCkListener
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //Register button OnClickListner
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,17 +78,21 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    //In this function we add new users to the database
     private void writeNewUsers(){
-        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"sadas",new ArrayList<String>(),false);
-
+        //We create a new user
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add("Dummy");
+        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"sadas",arrayList,false);
+        //We inset the new user into the datbase
         ref.child(user.getPhonenumber()).setValue(user);
         System.out.println("TAGfasz "+ ref);
 
-
+        //We notify the user that the registration was succssefull
         Toast.makeText(RegisterActivity.this,"Registered succssefuly",Toast.LENGTH_LONG).show();
     }
 
-
+    //Here we send the werification code
     private void verifySignInCode(){
         String codes = code.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSent, codes);
@@ -96,9 +103,11 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
+                    //If the verification code is valid we complete the registration
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             writeNewUsers();
+                            //We start the login acctivity
                             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                             finish();
                         } else {
@@ -111,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    //Here we send the verification code
     private void sendVerificationCode() {
 
         String phone = phonenumber.getText().toString();
@@ -153,6 +163,5 @@ public class RegisterActivity extends AppCompatActivity {
             codeSent = s;
         }
     };
-
 
 }

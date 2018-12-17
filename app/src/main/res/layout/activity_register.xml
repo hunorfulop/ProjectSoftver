@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
-            android:hint="Phone number"
+            android:hint="@string/phone_number"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
-            android:hint="Firstname"
+            android:hint="@string/firstname"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
-            android:hint="Lastname"
+            android:hint="@string/lastname"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -106,7 +106,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="149dp"
         android:layout_marginStart="147dp"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -119,7 +119,7 @@
         android:layout_marginEnd="139dp"
         android:layout_marginStart="147dp"
         android:layout_marginTop="32dp"
-        android:text="Get Code"
+        android:text="@string/get_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
