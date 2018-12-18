@@ -61,22 +61,24 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+        //Getting the current logged in user with SharedPreferences
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
         editor.apply();
         final String s = settings.getString("username","Dummy");
         user_number = s;
+
+        //Setting up the database connection
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
 
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
+            //Here we set the last name and first name to the profileActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    System.out.println("TAG771 " + dataSnapshot1.getKey() + '\t' + s);
                     if(Objects.equals(dataSnapshot1.getKey(), s)) {
-                        System.out.println("TAG771 " + dataSnapshot1.getKey() + '\t' + s);
                         User user = dataSnapshot1.getValue(User.class);
                         User listDataUser = new User();
                         assert user != null;
@@ -94,6 +96,7 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
+        //Setting up the view elements
         choose = findViewById(R.id.button_profil_chosse);
         upload = findViewById(R.id.button_profil_upload);
         profil_file_name = findViewById(R.id.edit_text_profil_file);
@@ -101,7 +104,7 @@ public class ProfilActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseref = FirebaseDatabase.getInstance().getReference("uploads");
 
-
+        //Choose button onClickListener
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +112,7 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
+        //Upload button onClickListener
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +121,7 @@ public class ProfilActivity extends AppCompatActivity {
         });
     }
 
+
     public void setText(String firstname, String lastname){
         TextView textView_firstName = findViewById(R.id.textView_firstName);
         TextView textView_lastName = findViewById(R.id.textView2_lastName);
@@ -124,6 +129,7 @@ public class ProfilActivity extends AppCompatActivity {
         textView_lastName.setText(lastname);
     }
 
+    //This function opens the systems fileChooser
     public void openFileChooser(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -131,6 +137,7 @@ public class ProfilActivity extends AppCompatActivity {
         startActivityForResult(intent,PICK_IMAGE_REQUEST);
     }
 
+    //We load the chosen file into the imageview form the profileActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -145,11 +152,14 @@ public class ProfilActivity extends AppCompatActivity {
 
         }
     }
+
     private String getFileExtension(Uri uri){
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
+    //Here we upload the file into the firebase storage
     private void uploadFile(){
         if(mImageUri != null){
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() +

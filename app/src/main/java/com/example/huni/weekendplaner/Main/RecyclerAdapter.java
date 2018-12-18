@@ -34,6 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     List<ListDataEvent> listDataEvents;
     Context context;
 
+    //RecyclerAdapter constructor
     public RecyclerAdapter(List<ListDataEvent> listDataEvents,Context context_) {
         this.listDataEvents = listDataEvents;
         this.context = context_;
@@ -47,14 +48,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
+            //Initializing the view elements
             itemImage = (ImageView)itemView.findViewById(R.id.item_image);
             itemTitle = (TextView)itemView.findViewById(R.id.item_title);
             itemDetail = (TextView)itemView.findViewById(R.id.item_detail);
 
+            //Setting OnClicks to the list elements
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent (v.getContext(), DetailsActivity.class);
+                    //Sending data through intent about the current event
                     intent.putExtra("NameofEvent",listDataEvents.get(position).getNameOfEvent());
                     intent.putExtra("DescofEvent",listDataEvents.get(position).getDescriptionOfEvent());
                     intent.putExtra("StartofEvent",listDataEvents.get(position).getStart_date());
@@ -63,6 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     intent.putExtra("AuthorfEvent",listDataEvents.get(position).getAuthor());
                     intent.putExtra("ImageofEvent",listDataEvents.get(position).getImage());
                     intent.putExtra("IdofEvent",listDataEvents.get(position).getId());
+                    //Starting the new Activity
                     v.getContext().startActivity(intent);
                 }
             });
@@ -71,6 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        //Setting up the card element view
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
@@ -79,6 +85,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        //Setting the data in the cardView elements
         viewHolder.itemTitle.setText(this.listDataEvents.get(i).getNameOfEvent());
         viewHolder.itemDetail.setText(this.listDataEvents.get(i).getStart_date());
         Glide.with(this.context)
@@ -87,6 +94,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     }
 
+    //Getting the size of arrayList
     @Override
     public int getItemCount() {
         return this.listDataEvents.size();

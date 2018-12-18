@@ -81,7 +81,6 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = new User(s);
-                        //In the if statement we verify if the user has aleready registerd
                         if (dataSnapshot.child(Objects.requireNonNull(ref.child(user.getPhonenumber()).getKey())).exists()){
                            User newuser = dataSnapshot.child(s).getValue(User.class);
                            user.setLastname(newuser.getLastname());
@@ -110,6 +109,4 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
