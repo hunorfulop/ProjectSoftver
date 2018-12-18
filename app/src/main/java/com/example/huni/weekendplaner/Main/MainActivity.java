@@ -13,12 +13,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.huni.weekendplaner.Sidebar.IntrestsActivity;
 import com.example.huni.weekendplaner.Login.LoginActivity;
 import com.example.huni.weekendplaner.Sidebar.ProfilActivity;
 import com.example.huni.weekendplaner.R;
+import com.example.huni.weekendplaner.Sidebar.Upload;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private int valtozo23123;
@@ -47,26 +51,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Seting up the DrawerLayout for the sidebar
         mdrawerlayout = (DrawerLayout) findViewById(R.id.drawer);
         mtoogle = new ActionBarDrawerToggle(this,mdrawerlayout,R.string.action_open,R.string.action_close);
         mdrawerlayout.addDrawerListener(mtoogle);
         mtoogle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //database
+        //Setting up the database connection
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Event");
         List<ListDataEvent> listDataEvents =  getDataFromDatabase();
 
-        //recyclerView
+        //Setting up the Recyclerview and calling its adapter
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerAdapter(listDataEvents,this);
         recyclerView.setAdapter(adapter);
+
+        //With SharedPreferences we get the current user
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        final String s = settings.getString("username","Dummy");
+
+        getProfilePicture(s);
     }
 
+    //With this function we get the profile picture form the database
+    public void getProfilePicture(final String s){
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("uploads");
+        ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    if(Objects.equals(s, postSnapshot.getKey())){
+                        setProfilePicture(upload.getmImageUrl());
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //With this function we load the profile picture in the sidbar imageview
+    public void setProfilePicture(String url){
+        ImageView imageView = findViewById(R.id.header_profile_picture);
+        Glide.with(this).load(url).into(imageView);
+    }
+
+    //In this function we get all the events from the database in an arrylist
     public List<ListDataEvent> getDataFromDatabase(){
         final List<ListDataEvent> list = new ArrayList<>();
         ref.addValueEventListener(new ValueEventListener() {
@@ -83,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String address =  Event.getAddress();
                     String description = Event.getDescriptionOfEvent();
                     String author = Event.getAuthor();
+                    String id = dataSnapshot1.getKey();
                     listDataEvent.setStart_date(start_date);
                     listDataEvent.setNameOfEvent(nameOfEvent);
                     listDataEvent.setImage(imageOfEvent);
@@ -90,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     listDataEvent.setAddress(address);
                     listDataEvent.setDescriptionOfEvent(description);
                     listDataEvent.setAuthor(author);
+                    listDataEvent.setId(id);
                     list.add(listDataEvent);
                 }
             }
@@ -109,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(itme);
     }
 
+    //In this function we set up the sidebar wit its elements and the navigation of its elements
     public boolean onNavigationItemSelected(MenuItem menuItem){
         menuItem.setChecked(true);
 
@@ -129,13 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 break;
         }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

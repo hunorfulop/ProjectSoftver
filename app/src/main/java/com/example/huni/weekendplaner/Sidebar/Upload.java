@@ -1,5 +1,6 @@
 package com.example.huni.weekendplaner.Sidebar;
 
+//Class used for uploading images to the firebaseStorage
 public class Upload {
     private String mName;
     private String mImageUrl;

@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="211dp"
+        android:layout_width="217dp"
         android:layout_height="210dp"
-        android:layout_marginEnd="172dp"
         android:layout_marginStart="7dp"
+        android:layout_marginEnd="172dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,13 +19,14 @@
 
     <TextView
         android:id="@+id/textView_nameOfEvent"
-        android:layout_width="73dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Concert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="84dp"
+        android:text="@string/concert"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,11 +34,12 @@
         android:id="@+id/textView2_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="41dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="33dp"
-        android:text="14 August 2019"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/_14_august_2019"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textView_nameOfEvent" />
 
@@ -49,7 +51,7 @@
         android:layout_marginEnd="31dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="19dp"
-        android:text="Bucursti-Bulevardul Basarabia 37-39-National Arena"
+        android:text="@string/bucursti_bulevardul_basarabia_37_39_national_arena"
         app:layout_constraintBottom_toTopOf="@+id/textView4_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,27 +73,31 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="34dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="62dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3_address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2_start"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
-
     <TextView
         android:id="@+id/textView_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="80dp"
-        android:text="TextView"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/_14_august_2019"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2_start" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/intersts_floatingAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_intrest"
+        android:focusable="true" />
+
 </android.support.constraint.ConstraintLayout>

@@ -2,6 +2,8 @@ package com.example.huni.weekendplaner.Login;
 
 import java.util.ArrayList;
 
+//User class is used for geting data and inseritng data to the database in the User node
+
 public class User {
 
     private String phonenumber;
@@ -72,5 +74,4 @@ public class User {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
-
 }

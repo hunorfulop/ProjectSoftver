@@ -1,5 +1,7 @@
 package com.example.huni.weekendplaner.Main;
 
+//ListDataEvent class is used to read and write data form the database
+
 public class ListDataEvent {
     public String address;
     public String author;
@@ -8,8 +10,17 @@ public class ListDataEvent {
     public String end_date;
     public String name;
     public String img;
+    public String id;
 
     public ListDataEvent() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setAddress(String address) {
