@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.huni.weekendplaner.Main.MainActivity;
 import com.example.huni.weekendplaner.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,11 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
 
-        //GetCode OncliCkListener
+        //GetCode button OncliCkListener
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,15 +80,15 @@ public class RegisterActivity extends AppCompatActivity {
         ArrayList<String> arrayList = new ArrayList<String>();
         arrayList.add("Dummy");
         User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"sadas",arrayList,false);
-        //We inset the new user into the datbase
+        //We inset the new user into the database
         ref.child(user.getPhonenumber()).setValue(user);
         System.out.println("TAGfasz "+ ref);
 
-        //We notify the user that the registration was succssefull
+        //We notify the user that the registration was successful
         Toast.makeText(RegisterActivity.this,"Registered succssefuly",Toast.LENGTH_LONG).show();
     }
 
-    //Here we send the werification code
+    //Here we send the verification code
     private void verifySignInCode(){
         String codes = code.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSent, codes);

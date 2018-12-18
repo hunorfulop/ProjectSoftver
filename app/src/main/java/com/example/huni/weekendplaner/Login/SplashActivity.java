@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.example.huni.weekendplaner.Login.LoginActivity;
 import com.example.huni.weekendplaner.Main.MainActivity;
 import com.example.huni.weekendplaner.R;
 
@@ -29,8 +28,8 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         final String s = settings.getString("username","Dummy");
 
-        //Here we verify if an user was aleready logged in, if yes we direct him to main screen, if not
-        //we direct him to loggin screen
+        //Here we verify if an user was already logged in, if yes we direct him to main screen, if not
+        //We direct him to login screen
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

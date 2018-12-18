@@ -2,7 +2,7 @@ package com.example.huni.weekendplaner.Login;
 
 import java.util.ArrayList;
 
-//User class is used for geting data and inseritng data to the database in the User node
+//User class is used for getting data and inserting data to the database in the User node
 
 public class User {
 

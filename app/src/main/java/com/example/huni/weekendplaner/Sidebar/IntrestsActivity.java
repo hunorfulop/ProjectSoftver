@@ -3,9 +3,6 @@ package com.example.huni.weekendplaner.Sidebar;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class IntrestsActivity extends AppCompatActivity {
@@ -30,9 +26,6 @@ public class IntrestsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
-    private DrawerLayout mdrawerlayout;
-    private ActionBarDrawerToggle mtoogle;
-    NavigationView navigationView;
     DatabaseReference ref;
     String s;
 
@@ -41,14 +34,17 @@ public class IntrestsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intrests);
 
+        //Initializing the view elements
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        //Getting the current logged in users
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
         s = settings.getString("username", "Dummy");
 
+        //Creating a database connection
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
         getIntrestsFromDatabase();
@@ -58,6 +54,7 @@ public class IntrestsActivity extends AppCompatActivity {
     private void getIntrestsFromDatabase() {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
+            //Here we get the current users interests arrayList fields data from the database
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = new User(s);
                 if (dataSnapshot.child(Objects.requireNonNull(ref.child(user.getPhonenumber()).getKey())).exists()){
@@ -80,7 +77,9 @@ public class IntrestsActivity extends AppCompatActivity {
         });
     }
 
+
     public void setEventForRecyclerView(ArrayList<String> arrayList){
+        //Here we verify if the interest array is empty
         if(!arrayList.isEmpty()){
              getEvent(arrayList);
         }
@@ -92,6 +91,7 @@ public class IntrestsActivity extends AppCompatActivity {
         final ArrayList<ListDataEvent> listDataEvent = new ArrayList<ListDataEvent>();
         refEvent.addValueEventListener(new ValueEventListener() {
             @Override
+            //Here we get all the data about the events from the interests array
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (String eventName : nameOfEvent) {
                     if (!Objects.requireNonNull(dataSnapshot.child(eventName).getKey()).isEmpty()) {
@@ -116,7 +116,6 @@ public class IntrestsActivity extends AppCompatActivity {
                         listDataEvent.add(dataEvent);
                     }
                 }
-                System.out.println("TAGG \t setRecy\t" + listDataEvent.size());
                 setReyclerView(listDataEvent);
             }
 
@@ -128,13 +127,11 @@ public class IntrestsActivity extends AppCompatActivity {
     }
 
     public void setReyclerView(ArrayList<ListDataEvent> events){
-        System.out.println("TAGG \t setRecy\t" + events.size());
+        //Setting up the recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerAdapter(events,this);
-        System.out.println("Faszok"+ events.get(1).getNameOfEvent());
         recyclerView.setAdapter(adapter);
-        System.out.println("FAsz");
     }
 }

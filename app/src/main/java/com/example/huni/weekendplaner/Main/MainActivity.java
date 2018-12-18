@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import com.example.huni.weekendplaner.Login.LoginActivity;
 import com.example.huni.weekendplaner.Sidebar.ProfilActivity;
 import com.example.huni.weekendplaner.R;
 import com.example.huni.weekendplaner.Sidebar.Upload;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private int valtozo23123;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Seting up the DrawerLayout for the sidebar
+        //Setting up the DrawerLayout for the sidebar
         mdrawerlayout = (DrawerLayout) findViewById(R.id.drawer);
         mtoogle = new ActionBarDrawerToggle(this,mdrawerlayout,R.string.action_open,R.string.action_close);
         mdrawerlayout.addDrawerListener(mtoogle);
@@ -75,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor editor = settings.edit();
         final String s = settings.getString("username","Dummy");
 
+        //Here we call the function which sets profile picture in the sidebar imageview
         getProfilePicture(s);
     }
 
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    //With this function we load the profile picture in the sidbar imageview
+    //With this function we load the profile picture in the sidebar imageview
     public void setProfilePicture(String url){
         ImageView imageView = findViewById(R.id.header_profile_picture);
         Glide.with(this).load(url).into(imageView);
@@ -137,18 +135,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),"Gone wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Something Gone wrong",Toast.LENGTH_LONG).show();
             }
         });
                 return list;
     }
 
-    public boolean onOptionsItemSeleted(MenuItem itme){
-        if(mtoogle.onOptionsItemSelected(itme)){
-            return true;
-        }
-        return super.onOptionsItemSelected(itme);
-    }
 
     //In this function we set up the sidebar wit its elements and the navigation of its elements
     public boolean onNavigationItemSelected(MenuItem menuItem){
@@ -171,13 +163,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 break;
         }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
