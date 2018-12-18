@@ -86,7 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"sadas",arrayList,false);
         //We inset the new user into the datbase
         ref.child(user.getPhonenumber()).setValue(user);
-        System.out.println("TAGfasz "+ ref);
 
         //We notify the user that the registration was succssefull
         Toast.makeText(RegisterActivity.this,"Registered succssefuly",Toast.LENGTH_LONG).show();

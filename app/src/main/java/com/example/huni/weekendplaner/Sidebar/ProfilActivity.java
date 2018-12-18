@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.huni.weekendplaner.Login.User;
 import com.example.huni.weekendplaner.Main.ListDataEvent;
+import com.example.huni.weekendplaner.Main.MainActivity;
 import com.example.huni.weekendplaner.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -116,6 +117,7 @@ public class ProfilActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(ProfilActivity.this, "Starting upload ", Toast.LENGTH_SHORT).show();
                 uploadFile();
             }
         });
@@ -176,11 +178,13 @@ public class ProfilActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
+                        Toast.makeText(ProfilActivity.this, "Upload successful: ", Toast.LENGTH_SHORT).show();
                         Uri downloadUri = task.getResult();
                         System.out.println("TAG771 profile pic: \t" + downloadUri.toString());
                         Upload upload = new Upload(profil_file_name.getText().toString().trim(),
                                 downloadUri.toString());
                         mDatabaseref.child(user_number).setValue(upload);
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     }else
                     {
                         Toast.makeText(ProfilActivity.this, "upload failed: " + task.getException(), Toast.LENGTH_SHORT).show();

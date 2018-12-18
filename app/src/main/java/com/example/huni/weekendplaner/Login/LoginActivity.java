@@ -55,17 +55,13 @@ public class  LoginActivity extends AppCompatActivity {
         editTextPhonenumber = findViewById(R.id.phoneNumber_editText);
         editTextCode = findViewById(R.id.code_editText);
 
-        findViewById(R.id.Main_creen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            }
-        });
+        findViewById(R.id.Main_creen).setVisibility(View.GONE);
 
         //Login button OnClickListener
         findViewById(R.id.login_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                 }
         });

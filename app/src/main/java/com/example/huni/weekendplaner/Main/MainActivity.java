@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Upload upload = postSnapshot.getValue(Upload.class);
                     if(Objects.equals(s, postSnapshot.getKey())){
                         setProfilePicture(upload.getmImageUrl());
+                        System.out.println("TAG771 set profile pic: \t");
                     }
                 }
             }
