@@ -7,9 +7,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+import com.example.huni.weekendplaner.Login.RegisterActivity;
 import com.example.huni.weekendplaner.Login.User;
 import com.example.huni.weekendplaner.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -43,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
         String StartofEvent = getIntent().getStringExtra("StartofEvent");
         String EndofEvent = getIntent().getStringExtra("EndofEvent");
         String AdresofEvent = getIntent().getStringExtra("AdresofEvent");
+        String AuthorfEvent = getIntent().getStringExtra("AuthorfEvent");
         String ImageofEvent = getIntent().getStringExtra("ImageofEvent");
         final String id = getIntent().getStringExtra("IdofEvent");
 
@@ -68,7 +74,6 @@ public class DetailsActivity extends AppCompatActivity {
                 .load(ImageofEvent)
                 .into(imageView_img);
 
-        //Here we add the current event to the intrest array from the user node
         intrests_floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = new User(s);
+                        //In the if statement we verify if the user has aleready registerd
                         if (dataSnapshot.child(Objects.requireNonNull(ref.child(user.getPhonenumber()).getKey())).exists()){
                            User newuser = dataSnapshot.child(s).getValue(User.class);
                            user.setLastname(newuser.getLastname());

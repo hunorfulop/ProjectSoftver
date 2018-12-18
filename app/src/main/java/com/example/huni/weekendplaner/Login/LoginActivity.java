@@ -113,7 +113,7 @@ public class  LoginActivity extends AppCompatActivity {
 
     }
 
-    //This function verifies the sign in code
+    //This function verifys the sign in code
     private void verifySignInCode(){
         String code = editTextCode.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSent, code);

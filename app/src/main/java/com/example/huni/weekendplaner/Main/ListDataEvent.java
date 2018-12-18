@@ -3,14 +3,14 @@ package com.example.huni.weekendplaner.Main;
 //ListDataEvent class is used to read and write data form the database
 
 public class ListDataEvent {
-    private String address;
-    private String author;
-    private String description;
-    private String start_date;
-    private String end_date;
-    private String name;
-    private String img;
-    private String id;
+    public String address;
+    public String author;
+    public String description;
+    public String start_date;
+    public String end_date;
+    public String name;
+    public String img;
+    public String id;
 
     public ListDataEvent() {
     }
