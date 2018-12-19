@@ -55,6 +55,7 @@ public class  LoginActivity extends AppCompatActivity {
         editTextPhonenumber = findViewById(R.id.phoneNumber_editText);
         editTextCode = findViewById(R.id.code_editText);
 
+        //Disposable button, only for debbuging
         findViewById(R.id.Main_creen).setVisibility(View.GONE);
 
         //Login button OnClickListener
